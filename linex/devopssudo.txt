@@ -1,0 +1,72 @@
+-===> file
+
+
+d===> directory 
+
+r for read 4
+w  for write 2
+x  for excute 1
+- for no permision 0
+ -rw-r--r--. 1 ec2-user ec2-user 496 Jun 11 01:14 file01
+-rw-r--r--. 1 ec2-user ec2-user  79 Jun 11 16:24 file02
+
+
+
+- => file
+d ==> directory
+
+
+r read contents ===> cat/ more /less code 4
+w write contant ===> vi              code 2
+x excute contant ===>                code 1
+- no permission ===>                 code 0
+
+
+-  rw-   r--  r--  file 420 400 400
+-  rw-   r--  r--  file 420 400 400
+
+
+addmistor ower present in all linex server
+
+he has highest privillage he can do what ever he wants like install/ uninstall software
+root user can add/ delete the user
+root user can create/ edit/delete any file
+
+
+
+normal user 
+he can do istall/ uninstall softwer in respected home directory
+by default he can't do install/uninstall the softwer
+
+to create root user 
+
+=> sudo su - ===> go to root directory
+==> useradd username of root directory create
+==> cd /home to check whether created or not ===> cat /etc/passwd | tail 01
+
+change root directory ===> su - userroot created
+
+set password to root directory 
+-------------------------------------------------------------
+sudo su -
+passwd rootdirectoryname
+
+
+create sudo rootdirectory
+----------------------------------------------------------
+sudo su-
+vi /etc/sudoesr
+last sudorootuser all =(all)  passwd=(all)
+:wq!
+service sshd restart
+
+==========================================
+sudo root user add user
+-------------------------------
+sudo su -
+
+sudo useradd manoj
+ ===========================================
+check /home ls-lrt
+
+

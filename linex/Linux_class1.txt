@@ -1,0 +1,145 @@
+
+Note:
+-----
+1. Different names of servers are , SERVER == VIRTUAL MACHINES (VMs) == EC2INSTANCE == COMPUTERS == MACHINES == all are same   
+2. Screen which we see after logging in is called as Shell  / Terminal 
+3. EC2 instance  ==> free for 750 hours / months 
+4. Observations in screen:
+
+   [ec2-user@ip-172-31-21-241 ~]$
+   ec2-user          ==> username using which we have logged in to server/ec2-instance
+   ip-172-31-21-241  ==> ip address ( unique number ) 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Linux:
+------
+Linux doesent have a GUI
+in linux we have to use commands only
+
+linux is case sensitive
+that is , it will accept commands only lower case letters.
+
+
+
+Linux OS:
+---------
+what are we going to learn in linux
+
+as a technical person ==> create files, modify files / folders, edit files, copy files 
+transfer files from 1 server to another server, 
+
+
+
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+File based commands.
+
+COMMANDS:
+---------
+
+File operations commands in linux:
+----------------------------------
+1. Touch command:
+   -------------
+   Touch command is used to create a blank file 
+
+   syntax: touch <file_name>
+   
+2. ls (list) command:
+   ------------------
+    ls command is used to list all files
+
+
+folders are called as directories in linux
+mkdir <directory/folder name>
+ 
+	
+	
+3. mkdir command:
+   ---------------
+   mkdir command is used to create directories / folders
+   
+   syntax: mkdir <directory_name>
+   
+   Note: in linux we call folders as directory
+
+
+3. pwd (present working directory) command:
+   ----------------------------------------
+   pwd shows in which directory we are in currently
+   
+   whenever we loggin to ec2instance, default directory (home directory) we will be at is /home/ec2-user/
+
+
+4. cd (change directory) command:
+   -----------------------------
+   cd command is used to change directory (or folder)
+   syntax: cd <directory_name>
+   
+   Note on navigation inside directories:
+   --------------------------------------
+   to come one directory backwards ==> cd ..
+   to come two directory backwards ==> cd ../..
+   to come three directory backwards ==> cd ../../..
+   to come to users default directory (i.e /home/ec2-user) from any location ==> cd    
+
+
+5. How to remove / delete a file & directory?
+   ------------------------------------------
+   rm (remove)
+   rm -f <file_name> ==> it will delete file
+   rm -rf <directory_name> ==> it will delete directory
+
+6. Clear:
+   ------
+   clear command will clear your screen / terminal / shell.
+
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+Next class:
+-----------
+
+
+
+vi (vi editor is used to edit the file)
+----------------------------------------
+
+syntax: vi <your_file_name>
+
+note: make sure you can see insert using i button, Esc(keyboard) is used to come out of insert mode
+
+  comeout of file with saving    ==> Esc(keyboard) :wq! ==> save(w)  quit(q) ! forcefully
+  comeout of file without saving ==> Esc(keyboard) :q!
+
+
+cat (concatanate)
+--------------
+Display the content of a file
+
+syntax: cat <your_file_name>
+
+
+cp (copy)
+----------------
+used to copy content of a file to another file
+syntax: cp <file_to_be_copied> <destinationFilename>
+
+if <destinationFilename> dosent exist , copy will create that
+
+mv (rename)
+----------------
+used to rename file
+syntax: mv <your_old_fileName> <newName>

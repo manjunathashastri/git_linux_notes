@@ -1,0 +1,93 @@
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Crontab Installations:
+---------------------------
+sudo yum install cronie -y
+sudo systemctl enable crond.service
+sudo systemctl start crond.service
+
+
+crontab: 
+--------
+is a scheduler to schedule  your scripts & commands for execution.
+
+syntax:     m     h   dom    mon   dow  sh  <absolute_path_to_myscript>  
+
+where:
+m    ==> Minutes.    
+         #The allowed values reange : 0 to 59.
+			
+h    ==> Hours.        
+         #The allowed values range: 0 to 23 
+			 
+dom  ==> Day of Month.   
+         #Allowed values range: 1 to 31
+			 
+mon  ==> Month of Year.   
+         #Allowed values range is: 1 to 12 
+         #Even we can use terms like JAN,FEB,MAR etc 
+			  
+dow  ==> Day of week.    
+         #The allowed values range is: 0 to 6 
+         #Even we can use terms like SUN(0),MON(1),TUE(2)  WED (3) THU(4) FRI(5) SAT(6)
+
+
+cron commands
+-------------------
+crontab -l   :     To list out cron jobs which are already configured.
+crontab -e  :    To edit  crontab & schedule scripts .
+
+yy
+Common crontab Examples:
+-----------------------
+				 
+- Run script AUG 15th 12 o clock
+	   00    12  15  AUG   MON  sh /home/ec2-user/dis_space_check.sh 
+
+- Run script Everday 12 o clock 
+       00 12 * * *  sh /home/ec2-user/dis_space_check.sh
+
+- Run script only on Monday & thursday everyminute
+       *  * * DEC MON,THU sh /home/ec2-user/dis_space_check.sh
+
+
+# Configure cron job which writes hello from cron message to cron_output_log  for every minute. 
+$ crontab -e
+*/1 * * * * echo "Hello from cron" >> /home/ec2-user/cron_output_log2
+
+
+
+Various Possibilities of specifying Date and Time USING CRONTAB:
+---------------------------------------------------------------
+ # m h dom mon dow command 
+ - Every minute   ==> * * * * * 
+
+- Every 2 minutes ==>  */2 * * * * 
+       note: */2 means every 2nd minute 
+
+-  Every 3 minutes  ==> */3 * * * *
+
+- Every 1 hour  ==>  0 * * * * 
+
+- Every 2 hours   ==> 0 */2 * * * 
+
+- Execute only at 6'o clock,14'o clock and 22o clock
+   0 6,14,22 * * * 
+
+- Every Night at midnight   ==> 0 0 * * *
+
+- Every Sunday only once  ==>  0 0 * * SUN 0 0 * * 0
+
+- Only on week days  ==> 0 0 * * 1-5
+
+- Only on week-ends   ==> 0 0 * * 6,0 
+
+- Every month on 1st  ==>  0 0 1 * * 
+
+- Every Year Jan 1st   ==> 0 0 1 1 *
+
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

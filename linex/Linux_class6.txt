@@ -1,0 +1,206 @@
+
+
+Note:
+-----
+
+1. Absolute path & relative path:
+   ------------------------------
+   -absolute path means complete path to your file
+    it will start from / ==> root directory
+   - Every single file and directory starts from the root( / ) directory
+
+[ec2-user@ip-172-31-82-40 ~]$ ls d1/d2/d3/census_data_linkfile
+d1/d2/d3/census_data_linkfile
+[ec2-user@ip-172-31-82-40 ~]$
+[ec2-user@ip-172-31-82-40 ~]$
+[ec2-user@ip-172-31-82-40 ~]$
+[ec2-user@ip-172-31-82-40 ~]$ ls /home/ec2-user/d1/d2/d3/census_data_linkfile
+/home/ec2-user/d1/d2/d3/census_data_linkfile
+[ec2-user@ip-172-31-82-40 ~]$
+
+
+
+What is the difference between absolute path and relative path?
+--------------------------------------------------------------
+    An absolute path begins with the root (/) directory ==> /home/ec2-user/dir1/myfile1
+    A relative path starts from your present working directory(pwd), if i am in /home/ec2-user directory then relative path is dir1/myfile1
+ 
+
+2. man (manual pages): If you don't know the command you can use man and find the details of the command
+   syntax: man <any_command>
+   Eg: man ls
+
+3. --help: to see how you can use command effectively with other options
+   synatx: <any_command> --help
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+File Permissions
+-----------------
+Permissions to files / directories are applied in 3 level
+1. user level
+2. group level
+3. other users level
+
+Total 9 permissions. First 3 are user permissions, next 3 are group permissions and next 3 are others permissions
+
+d rwx   rw-   r-x 2 ec2-user ec2-user 6 Nov  7 03:06 dir1
+d rwx   rw-   r-x          
+  ---   ---   ---
+   |     |     |
+  user   |     |
+       group   |
+             others	  
+  rwx   rw-   r-x          
+ ---   ---   ---
+r=read     ==> use commands such as cat, more, less, head / tail for a file
+w=write    ==> use commands such vi(to modifiy), rm (to delete) for a file
+x=execute  ==> you can run any command, scripts / run a file as a programm
+
+r=read=4
+w=write=2
+x=execute=1
+
+current        desired
+- rw- rw- r-- ==> rwx     rwx      rw-
+  420 420 400     421     421      421
+                 4+2+1   4+2+1    4+2+1
+   6   6   4       7       7        7
+ 
+ to give only read permissions to all
+ 
+ - r-- r-- r--
+   400 400 400
+    4   4   4
+	
+ to give write permisions to user
+ - rwx r-x r--
+   421 401 400
+    7   5   4
+
+
+
+---------------------------------------------------------
+
+
+
+chmod (change mode)
+-----------------
+chmod command is used to change the permissions of file / directory
+
+
+syntax:
+  for file--->    chmod <Permission_in_Number> <FileName>
+                     eg: 1. chmod 777 <FileName> ==> it will give all permissions(rwx) to everyone
+					 
+  for directory:  chmod -R <Permission_in_Number> <DirectoryName>
+                     -R ==> will change/applies mentioned permissions of all directories & sub directories
+
+examples:
+
+   list of some common settings, numerical values and their meanings:
+   
+   -rw------- (600) -- Only the user has read and write permissions.
+   
+   -rw-r--r-- (644) -- Only user has read and write permissions; the group and others can read only.
+   
+   -rwx------ (700) -- Only the user has read, write and execute permissions.
+   
+   -rwxr-xr-x (755) -- The user has read, write and execute permissions; the group and others can only read and execute.
+   
+   -rwx--x--x (711) -- The user has read, write and execute permissions; the group and others can only execute.
+   
+   -rw-rw-rw- (666) -- Everyone can read and write to the file. Bad idea.
+   
+   -rwxrwxrwx (777) -- Everyone can read, write and execute. Another bad idea.
+
+
+__________________________________________________________________________________________________
+
+chown(change ownership)
+-----------------------
+chown command is used to change ownership of file / directory
+
+syntax: chown <usersName>:<groupName> fileName
+        chown -R <usersName>:<groupName> directoryName
+        
+Note:
+-R is mandatory for directories
+for running chown / chmod may require sudo permissions
+
+__________________________________________________________________________________________________
+
+
+
+
+
+
+Software management in Linux:
+-----------------------------
+- we do need to install/uninstall third party software into linux OS
+- we do update our softwares & os when required
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Note:
+-----
+1. package == software 
+   android ==> playstore ==> search ==> install
+   windows ==> microsoft/internet ==> search ==> install
+   Linux ==> yum (or) apt ==> search ==> install
+
+   - in redhat based systems software is managed by using yum tool
+   - in debian based systems(ubuntu) software is managed by using apt tool
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+yum :
+---------
+- Yum is package manager using which we can install any packages (softwares)
+
+  we can search, install, remove a software from linux os
+
+syntax: yum search <software/package name>
+        yum search tree
+        yum search git
+       
+
+
+For Adding / Installing a software:
+--------------------------------
+- using install keyword along with apt/yum
+  syntax: yum install <software/package name> 
+
+Note: while installing / unintslaling linux will ask for confirmation using y/n ==> select y 
+
+For uninstalling a software:
+--------------------------------
+- using remove keyword along with apt/yum
+   syntax: yum remove <software/package name> 
+
+
+
+
+
+updating Linux system:
+----------------------
+- Updating software / app / os is very important as updates brings added security and add new features to our software
+- in linux, updates won't reach us automatically as in window
+
+
+we have to manually update our system:
+--------------------------------------
+- in linux os we do have two kinds of updates
+   update & upgrade
+
+i) update:
+- it updates the list of software, applications that are ready to get update.
+  Eg: sudo yum update
+
+
+ii)upgrade 
+  - it actually updates every software that has updates
+  - it takes may take hours/days for upgrade

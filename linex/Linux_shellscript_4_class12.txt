@@ -1,0 +1,314 @@
+Note:
+-------
+
+STRING means group of alphabets / pattern
+
+ ALL possible conditions which can be used with "if conditions" 
+	 a.conditions used for  matching / checking "strings" are :
+	 
+	 eg: string => alice = junjesh
+
+         [ $STRING == STRING ] - Equal
+         [ $STRING != STRING ] - Not Equal
+	     [ -z $STRING ] - Empty string 
+         [ -n $STRING ] - Not empty string	 
+		       
+	b. conditions used for "mathematicall operations" / Relational operators are : 
+	     here NUM means number
+         [ $NUM -eq NUM ] - Equal
+         [ $NUM -ne NUM ] - Not equal
+         [ $NUM -lt NUM ] - Less than
+         [ $NUM -le NUM ] - Less than or equal
+         [ $NUM -gt NUM ] - Greaterthan
+         [ $NUM -ge NUM ] - Greater
+    
+	c. conditions used for checking file/directory/ link types are:
+          [ -f $FILEname ] - Exists        ==> to check file Exists are not
+		  [ -d $DIRECTORYname ] - Directory  ==> to check directory Exists are not
+		  [ -h $FILEname ] - Symlink/softlink    ==> to check link is softlik are not
+		  
+	   To check permissions of file: 
+          [ -r $FILEname ] - Readable  ==> to check file has read permissions are not
+          [ -w $FILEname ] - Writable  ==> to check file has write permissions are not
+
+	
+	
+	d. based on commands exit status :
+	      [ $? -eq 0 ]   # conditions used, if previous commans return zero/ non zero exit code
+
+If $? equals zero, it indicates success.
+If $? is non-zero, it indicates failure.
+
+
+examples on if conditions used for checking file/directory/ link types are:
+--------------------------------------------------------------------------------
+#check the file exists/ are not in the given name (as input from read command)
+
+Note:
+----
+
+[ -f $FILENAME ] ==>  this condition block used to check FILE in mentioned name exists or not ?
+  
+[ -d $DIRECTORYNAME ] ==> condition block used to check directory in mentioned name exists or not
+
+[ -h $FILENAME ] ==> this condition block used to check hardlink in mentioned name exists or not ?
+
+
+FILENAME=$1
+if [ -f $FILENAME ]
+then
+   echo "file f1 exists"
+else 
+   echo "file f1 doesent exists...please check"
+fi
+
+
+if  [ -d $1 ]
+then 
+   echo "directory exists......"
+else 
+  echo  "directory doesent exists....please check"
+fi
+
+
+
+
+
+script to check the file exists/ are not in the given name (as input from read command):
+-------------------------------------------------------------------------------------
+
+
+[ec2-user@ip-172-31-24-167 ~]$ cat if_check_for_fileName.sh
+#!/bin/bash
+echo " Enter input file name you need to check............"
+read FILE_NAME
+if [ -f $FILE_NAME ]
+then
+  echo " file name provided by you in read command is available in pwd & please find its details below....."
+  ls -lrt | grep $FILE_NAME
+else
+  echo " file name provided in read command is unavailable/doesent exist....."
+fi
+
+
+
+
+Script to check the directory exists/ are not in the given name (as input from read command) :
+----------------------------------------------------------------------------------------------
+
+[ec2-user@ip-172-31-24-167 ~]$ cat if_check_for_directoryName.sh
+#!/bin/bash
+echo " Enter input directory name you need to check............"
+read DIR_NAME
+if [ -d $DIR_NAME ]
+then
+  echo " Directory name provided by you in read command is available & please find its details below....."
+  ls -lrt | grep $DIR_NAME
+else
+  echo " Directory name provided in read command is unavailable/doesent exist....."
+fi
+
+
+##Mutiple conditios check
+----------------------------
+
+if - elif - else 
+
+
+syntax: 
+if [condition 1]
+then 
+   //some command if condition is true
+elif [condition 2]
+   //some command elif condition is true  
+else
+   //some command if condition is false
+fi 
+
+
+
+------------
+check if argument passed is either of virat (or) kohli (or) not any of both
+
+#!/bin/bash
+if [ $1 == virat ]
+then
+    echo " condition is true/ sucesss: Given argument name is virat.... "
+elif [ $1 == kohli ]
+then 
+    echo "elsif condition is true... elif condition is true/ sucesss: Given argument name is kohli...."
+else
+     echo " both condition has failed : Given argument is not virat niether kohli.... "
+fi
+
+
+
+#shell script to find the greatest of three numbers
+
+#!/bin/bash
+
+# Read three numbers from the usera
+echo "Enter the first number:"
+read num1
+echo "Enter the second number:"
+read num2
+echo "Enter the third number:"
+read num3
+
+# Check which number is the greatest
+if [ $num1 -ge $num2 ] && [ $num1 -ge $num3 ]
+then
+    echo "The greatest number is: $num1"
+elif [ $num2 -ge $num1 ] && [ $num2 -ge $num3 ]
+then
+    echo "The greatest number is: $num2"
+else
+    echo "The greatest number is: $num3"
+fi
+
+
+-----------------------
+
+Loops
+----------
+shell scripts can repeat particular instruction again and again, until particular condition satisfies.
+A group of instruction that is executed repeatedly is called a loop.
+
+why loops?
+  If we want to execute a group of commands multiple times then we should go for loops / iterative statements.
+
+Types of loops
+Majorly we have two types of loops
+• For loop
+• While loop
+
+
+For Loop
+------------
+ for loop operates on lists of items. It repeats a set of commands for every item in a list.
+
+The for loop syntax:
+
+for variable in value1 value2 ... valueN
+do
+       #execute some commands
+	   command1
+       command2
+       ....
+       ....
+       commandN
+done
+
+
+example 1: Script to Print welcome 5 times using for loop
+
+
+#!/bin/bash
+for i in 1 2 3 4 5
+do
+  echo "Welcome $i times."
+done
+
+output
+--------
+Welcome 1 times
+Welcome 2 times
+welcome 3 timess
+Welcome 4 times
+Welcome 5 times
+
+
+example2: Script to print fruits list
+
+#!/bin/bash
+for fruit in mango apple kiwi orange 
+do
+ echo "I like $fruit."
+done
+
+output
+--------
+i like mango
+i like apple
+i like kiwi
+i like orange
+
+
+
+------------------------
+eg2_for loop:
+---------------
+script to print variable values  & create  directory for each value........
+
+#!/bin/bash
+set -x
+for dir_name in dir_1 dir_2 dir_3 dir_4
+do
+
+   echo " create directory for each tool in my_dir "
+   mkdir $dir_name
+   ls -lrt | tail -1
+   echo
+   echo
+   echo
+done
+echo " closing script execution........"
+
+-----------------------
+eg3_for loop:
+---------------
+script to print variable values  & create  directory for each value........
+
++++++++++++++++++++++++++++++++++
+#!/bin/bash
+set -x
+for TOOL_STACK in git jenkins docker k8s aws ansible
+do
+   echo " Currently we are learning this $TOOL_STACK "
+   echo " create directory for each tool in Tool stack "
+   mkdir $TOOL_STACK
+   ls -lrt | tail -1
+   echo
+   echo
+   echo
+done
+echo " closing script execution........"
+
+======================================
+#!/bin/bash
+for i in linex aws ansible jenkins azure net
+do
+        echo " iam learning $i"
+         mkdir $i
+        echo
+        echo
+        ls -lrt | tail -1
+        echo
+        echo
+done
+
+
++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+assume we have 100  servers , we want to copy a file called as "hosts" to all 100 servers to path "/etc" 
+
+
+eg3 for loop :   to scp files to multiple servers
+-----------------------------------------------------
+#!/bin/bash
+set -x
+for servers_ip_address in { server1_ip, server2_ip, server3_ip, server4_ip , .. server100_ip }
+do
+   scp hosts ec2-user@$servers_ip_address:/etc/
+done
+ 
+
+
+
+
+___________________________________________________________________________________________________________________________________

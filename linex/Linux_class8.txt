@@ -1,0 +1,373 @@
+Ports:
+------
+Port numbers are used as Point of communication
+
+linux system has 65,000 port numbers available
+
+0-1000 ==> reserved by linux
+
+
+ssh - port 22
+http - port 80
+https - port 443
+telnet - port 23
+
+
+netstat (network statsics)
+-------------------------
+command is used to list all listnening/active ports
+
+syntax: netstat -lntp
+
+
+
+
+--------------------------------
+Linux OS:
+---------
+linux operating system has 2 major faimilies
+1. RHEL-Family:
+   ----------- 
+   linux falvors in Redhat family are Redhat, Centos and Amazon Linux...
+
+2. Debian family:
+   --------------
+   linux falvors in Debian family is ubuntu
+
+Note:
+in Redhat linux family---> yum install <software_name>
+in debian/ubuntu family -> apt-get install <software_name>
+-------------------------------------
+
+
+-------------------------------------------------------------------------------
+how to check OS related info
+
+cat /etc/os-release
+--------------------------------------------------------------------------------
+
+top[top]
+-------
+Command is used to check which process utilizing what % of CPU / % of Memory(RAM)
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Note:
+-----
+
+SERVER == COMPUTERS == MACHINES === VIRTUAL MACHINE === EC2 INSTANCES ========> All are same
+
+what all compoenents does  a server have?
+--> HARDware resources ( RAM + HDD + CPU ) + OS 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Networking :
+=============
+Two or more systems connected each other ==>> networking 
+
+systems ==>>>nothing but servers.
+
+Two servers are in same network ==>>> minimum requirements..
+
+Two servers must be cabled with other.
+
+======================================================================================
+
+Networking advantages..
+
+1. files transfer ==>>> from one server to another server.
+
+2. Remoteuserly login ==>> from one server to another server. 
+
+
+--------------------------------------------------------------------------------
+
+ 
+scp (secure copy)
+------------------
+used to transfer files/directory from one server to another(remote) server
+
+syntax:
+--------
+For File:   
+scp <file_tobe_copied> <username_of_targetserver>@<ipaddress_of_targetserver>:<path_in_targetserver>
+
+
+scp census_data_tobecopied  hari3@13.49.240.55:/home/hari3
+
+scp sample1 soni@54.162.242.161:/home/soni/
+54.162.242.161
+ 
+For Directory-->
+scp -r <file_tobe_copied> <username_of_targetserver>@<ipaddress_of_targetserver>:<path_in_targetserver>
+
+-r ==> mandatory while copying directories
+
+
+scp -r test soni@54.162.242.161:/home/soni/
+
+Note:
+-----
+- create user with password 
+- ensure password authentication is enabled
+
+---------------------------------------------------------------------------------------
+
+ping
+----
+is used to check any server is up & running 
+
+syntax:
+ping <ip_of_remote_server>
+
+---------------------------------------------------------------------------------------
+
+
+
+how to check size of a file or directory?
+-----------------------------------------
+
+du -sh <filename/directoryname>
+
+
+--------------------------
+cut command
+-------------------
+is used to cut the content of a file column wise
+syntax: cut -d " " -f<columnNumber> <filename>
+
+d=delimeter=separator
+f= field
+
+vi cut_example 
+----------------------------
+AndhraPradesh AP hyderabad
+ArunachaPradesh AC Itanagar
+Assam AS guwahati
+Bihar BH patna
+Chhattisgarh CG Raipur
+karanataka KA benagluru
+uttarparadesh UP lucknow
+jammuKashmir JK srinagar
+-------------------------
+
+vi cut_example2
+----------------------------
+AndhraPradesh|AP|hyderabad
+ArunachalPradesh|AC|Itanagar
+Assam|AS|guwahati
+Bihar|BH|patna
+Chhattisgarh|CG|Raipur
+karanataka|KA|benagluru
+uttarparadesh|UP|lucknow
+jammuKashmir|JK|srinagar
+-------------------------
+logs:
+
+[ec2-user@ip-172-31-93-35 ~]$ cut -d " " -f1 cut_example
+AndhraPradesh
+ArunachalPradesh
+Assam
+Bihar
+Chhattisgarh
+karanataka
+uttarparadesh
+jammuKashmir
+[ec2-user@ip-172-31-93-35 ~]$ cut -d " " -f2 cut_example
+AP
+AC
+AS
+BH
+CG
+KA
+UP
+JK
+[ec2-user@ip-172-31-93-35 ~]$ cut -d " " -f3 cut_example
+hyderabad
+Itanagar
+guwahati
+patna
+Raipur
+benagluru
+lucknow
+srinagar
+[ec2-user@ip-172-31-93-35 ~]$
+[ec2-user@ip-172-31-93-35 ~]$
+[ec2-user@ip-172-31-93-35 ~]$ cut -d " " -f1,3 cut_example
+AndhraPradesh hyderabad
+ArunachalPradesh Itanagar
+Assam guwahati
+Bihar patna
+Chhattisgarh Raipur
+karanataka benagluru
+uttarparadesh lucknow
+jammuKashmir srinagar
+
+
+
+
+awk_example_file
+------------------
+AndhraPradesh    AP  hyderabad
+ArunachaPradesh  AC  Itanagar
+Assam            AS  guwahati
+Bihar            BH  patna
+Chhattisgarh     CG  Raipur
+karanataka       KA  benagluru
+uttarparadesh    UP  lucknow
+jammuKashmir     JK  srinagar
+-------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------
+awk
+---------------------------------------------------------------------------------------
+awk command is used to cut file column wise & row wise
+
+syntax:
+awk -F " " '{print$1}' <filename>
+
+-F ==field separator
+
+(i)to print/cut first column of a file
+
+awk -F " " '{print$1}' <filename>
+
+(ii)to print/cut third column of a file
+
+awk -F " " '{print$3}' <filename>
+
+(iii) to print/cut last column of a file
+   awk -F " " '{print$NF}' disk_util_file
+   
+(iv) to print/cut second last column of a file
+   awk -F " " '{print$(NF-1)}' disk_util_file
+
+
+
+
+   
+
+[root@ip-172-31-10-87 dirA]# cat awk_example_file
+AndhraPradesh    AP  hyderabad
+ArunachaPradesh  AC  Itanagar
+Assam            AS  guwahati
+Bihar            BH  patna
+Chhattisgarh     CG  Raipur
+karanataka       KA  benagluru
+uttarparadesh    UP  lucknow
+jammuKashmir     JK  srinagar
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]# awk -F " " '{print$1}' awk_example_file
+AndhraPradesh
+ArunachaPradesh
+Assam
+Bihar
+Chhattisgarh
+karanataka
+uttarparadesh
+jammuKashmir
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]# awk -F " " '{print$2}' awk_example_file
+AP
+AC
+AS
+BH
+CG
+KA
+UP
+JK
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]# awk -F " " '{print$3}' awk_example_file
+hyderabad
+Itanagar
+guwahati
+patna
+Raipur
+benagluru
+lucknow
+srinagar
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]# df -kh
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  2.8M  188M   2% /run
+/dev/xvda1      8.0G  1.6G  6.5G  20% /
+tmpfs           475M     0  475M   0% /tmp
+tmpfs            95M     0   95M   0% /run/user/1000
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]# df -kh | head -5
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  2.8M  188M   2% /run
+/dev/xvda1      8.0G  1.6G  6.5G  20% /
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]# df -kh | head -5 | tail -1
+/dev/xvda1      8.0G  1.6G  6.5G  20% /
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]#
+[root@ip-172-31-10-87 dirA]# df -kh | head -5 | tail -1 | awk -F " " '{print$5}'
+20%
+[root@ip-172-31-10-87 dirA]#
+
+   
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+x=10
+y=20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+variables:
+----------
+Variables are memory location which can store some values.
+
+syntax: <variable_name>=<variable_value>
+        eg: MYNAME=devops_user
+  
+
+
+How to print / check / substitute / call values of a variable?
+--------------------------------------------------------------
+
+$ (dollar) is mandatory while substituting varaible ==> $<variable_name>
+
+echo $<variable_name>
+
+
+ex: PLAYER=viratKohli
+    echo " my favorite sportsmen is $PLAYER "
+
+
+ex: user_name="devopsAdmin"
+
+echo "Hello, $user_name! How are you today?"

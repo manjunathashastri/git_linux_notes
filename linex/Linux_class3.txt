@@ -1,0 +1,270 @@
+Note:
+-----
+1.Vi mode
+  - to set numbers in file: Esc(keyboard) & type set nu
+  - to goto any particular line in vi mode ==> Esc(keyboard) : <lineNumber> & Enter(keyboard)
+  - to delete a line ==> Esc(keyboard) & type dd (no colons)
+  
+
+2. CD
+  - to move inside directorys using path cd <dirname>/<dirname>/<dirname>/<dirname> 
+
+Assignment:
+-----------
+copy all files present in /home/ec2-user/ directory into directory called dirX
+
+
+--------------------------------------------------------------------
+
+Redirect >
+-----------
+Redirect is used to write output of a command to file
+  eg: ls -lrt > myFileName
+      ls > myFileName
+  
+  it will overwrite / override the content of file each time if file already exists
+  
+Append >>
+----------
+append is used to write output of a command to file, but append will not overwrite/override content of  file, it will attach to the end of a file.
+   eg: ls >> myFileName
+       echo "hello all, welcome to devops classes" >> myFileName
+ 
+
+
+
+cat , more , less 
+
+
+ 
+Head
+-----
+head command is used to display top most part of a file
+  syntax: head -5 <fileName> ==> it will show first 5 lines of a file
+  
+  
+  i.print first 15 lines of my file
+    head -15 <fileName>
+  
+  ii. print first 1st line of my file
+     head -1 <fileName>
+  
+  Note:
+  -----
+  if you dont specify any number, head by default will print first 10 lines
+  head <fileName>
+  
+  
+Tail:
+-----
+tail command is used to display the bottom part of file.
+  
+  i. to display last 5 lines of a file
+  syntax: tail -5 <fileName> 
+  
+  
+  ii. to display very last line of a file
+  syntax: tail -1 <fileName>
+
+
+echo:
+-----
+echo is used to print a statement in terminal.
+
+syntax: echo "<your_content>"
+
+eg: echo "hello all, welcome to devops classes"
+
+
+
+
+What is Piping?  
+===============
+    | 
+   A way of connecting commands together. 
+   A way of passing data from the output of one command as the input to another command.
+
+usecase(i): to print only line number 99 from myFile
+        
+		
+          [ec2-user@ip-172-31-16-223 ~]$ tail -2 numbers_file
+          Line 99
+          Line 100
+          [ec2-user@ip-172-31-16-223 ~]$		 
+		
+		observation: tail -2 numbers_file will print last 2 lines of the file. but we need only first line (i.e line 99) from the printed ouput, here i can join 2 commands using piping | which will take input from previous command & generate new output.
+		
+	      [ec2-user@ip-172-31-16-223 ~]$ tail -2 numbers_file | head -1
+          Line 99
+          [ec2-user@ip-172-31-16-223 ~]$
+	
+		
+		
+		
+	(ii) to see / display 97th line only
+		    tail -3 numbers_file | head -1
+
+
+        (iii) to display 9th line of a file
+		     head -10 numbers_file | tail -1
+
+
+
+
+Grep 
+----
+grep is used to search the pattern (keyword) in a file.
+if pattern is found, it will print all matched lines /entire line
+
+syntax: grep <pattern_to_search> fileName
+
+Note: Pattern = name =string all are same	   
+ 
+ 
+ 
+---------------------------------------------------
+SI  City_Name         Population    State
+1   bengaluru          1.4 crore    karnataka
+2   mumbai             2.5 crore    maharashtra
+3   newdelhi            1  crore    delhi
+4   chennai            90  lakhs    tn
+5   kolkata            1.2 crore    westbengal
+6   ahmedabad          60  lakhs    gujarat
+7   hyderabad          70  lakhs    andhrapradesh
+8   pune               45  lakhs    maharashtra
+9   Hubli_dharwad      10  lakhs    karnataka
+10  gurgaon            10  lakhs    haryana
+---------------------------------------------------
+
+
+ to search pattern ==> "karnataka" 
+
+syntax: grep name/pattern fileName
+        grep karnataka census_data
+		
+	grep mumbai census_data
+		
+	grep chennai census_data
+		
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Next class Topics:
+------------------
+- word count (wc) 
+- egrep , vgrep & rgrep
+- links(Hard link and soft link)  
+- File permissions
+
+
+
+
+
+
+
+Note:
+------
+content for head & tail with pipeing options
+
+
+This is Line number 1
+This is Line number 2
+This is Line number 3
+This is Line number 4
+This is Line number 5
+This is Line number 6
+This is Line number 7
+This is Line number 8
+This is Line number 9
+This is Line number 10
+This is Line number 11
+This is Line number 12
+This is Line number 13
+This is Line number 14
+This is Line number 15
+This is Line number 16
+This is Line number 17
+This is Line number 18
+This is Line number 19
+This is Line number 20
+This is Line number 21
+This is Line number 22
+This is Line number 23
+This is Line number 24
+This is Line number 25
+This is Line number 26
+This is Line number 27
+This is Line number 28
+This is Line number 29
+This is Line number 30
+This is Line number 31
+This is Line number 32
+This is Line number 33
+This is Line number 34
+This is Line number 35
+This is Line number 36
+This is Line number 37
+This is Line number 38
+This is Line number 39
+This is Line number 40
+This is Line number 41
+This is Line number 42
+This is Line number 43
+This is Line number 44
+This is Line number 45
+This is Line number 46
+This is Line number 47
+This is Line number 48
+This is Line number 49
+This is Line number 50
+This is Line number 51
+This is Line number 52
+This is Line number 53
+This is Line number 54
+This is Line number 55
+This is Line number 56
+This is Line number 57
+This is Line number 58
+This is Line number 59
+This is Line number 60
+This is Line number 61
+This is Line number 62
+This is Line number 63
+This is Line number 64
+This is Line number 65
+This is Line number 66
+This is Line number 67
+This is Line number 68
+This is Line number 69
+This is Line number 70
+This is Line number 71
+This is Line number 72
+This is Line number 73
+This is Line number 74
+This is Line number 75
+This is Line number 76
+This is Line number 77
+This is Line number 78
+This is Line number 79
+This is Line number 80
+This is Line number 81
+This is Line number 82
+This is Line number 83
+This is Line number 84
+This is Line number 85
+This is Line number 86
+This is Line number 87
+This is Line number 88
+This is Line number 89
+This is Line number 90
+This is Line number 91
+This is Line number 92
+This is Line number 93
+This is Line number 94
+This is Line number 95
+This is Line number 96
+This is Line number 97
+This is Line number 98
+This is Line number 99
+This is Line number 100

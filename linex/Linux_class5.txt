@@ -1,0 +1,231 @@
+Note:
+-----
+
+1. Autocompletion:
+   ----------------
+   use tab key from your keyboard to use autocompletion
+   - type first charecter then type tab
+     ex: to cat census data file
+         cat c<press_tab_key>
+	     cat census_data
+
+
+2. Compute resources / Hardware resources means RAM, HDD , CPU
+   in EC2 instance (free tier) ==> RAM 1GB , 8GB HDD , 1core cpu
+
+
+3. whoami : whoami command is used to check which user you have logged in to server as.
+
+
+
+Hardware compoent's / COMPUTE resources check commands:
+-------------------------------------------------------
+
+-  free (To check RAM size):
+  --------------------------
+    free command is used to check system memory(RAM)
+    syntax: free -m 
+
+    Note: in linux RAM is generally called as memory
+
+- To check disk size / HDD / Storage:
+   -----------------------------------
+   df means disk fragmentation.
+   It displays file system disk space usage
+
+   syntax: df -kh .
+
+   Filesystem      Size  Used Avail Use% Mounted on
+   /dev/xvda1      8.0G  2.2G  5.8G  28% /
+
+
+- To check number of cpu's :
+  --------------------------
+  nproc ==> it stands for number of cpu's in the server
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+File description:
+-----------------
+Whenever a new file is created, when we list the file using. ls -lrt commands we can seee description of those files like below
+
+   • File type: whether its a file or directory ?
+   • Date and time of creation
+   • File size
+   • Permissions on the file.
+   • Owner and group owner of the file.
+
+
+
+
+[ec2-user@ip-172-31-16-223 ~]$ ls -lrth
+total 8.0K
+-rw-rw-r-- 1 ec2-user ec2-user 792 Nov  4 01:39 samplefile
+-rw-rw-r-- 1 ec2-user ec2-user 600 Nov  4 01:54 census_data
+drwxrwxr-x 2 ec2-user ec2-user   6 Nov  7 05:09 d1
+
+
+Observations:
+First column is Permissions block:
+permissions block is used to type of file & its permissions:
+ - in first charecter of permissions block we can identify type of a file whether its directory or file 
+   if it starts with - ==> file 
+   if it starts with d ==> directory
+   
+   Note:
+   linux uses code for file permissions
+    r ==> read    ==> code ==> 4
+    w ==> write   ==> code ==> 2
+    x ==> execute ==> code ==> 1
+    - ==> no permissions ==> code ==> zero
+ 
+ read ==> we can cat / more / less file
+ write ==> we can edit a file
+
+ 
+ example: permissions of below file in coded format
+-rw-rw-r-- 1 ec2-user ec2-user 792 Nov  4 01:39 samplefile
+ 420420400
+ 
+  
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+User adminstration:
+-------------------
+
+In linux we have 2 types of users
+1. Root user:
+   - root user ==> owner (adminstrator) present in all linux servers
+   - root user has highest priviliges, he can do anything in this server
+   - root user can install/uninstall any softwares
+   - root user can add/delete user 
+   - root user can create/edit/delete any files in the server.
+   
+2. normal users(non root users): 
+   - normal users can only create/edit/delete any files only in thier respective home directories.
+     that is in /home/ec2-user, /home/nithin 
+     by default they cannot do any install/uninstall softwares & other administration activities
+
+
+
+
+
+How to switch from ec2-user to root user?
+-----------------------------------------
+sudo su -
+
+
+
+
+How to add a new user to linux machines? 
+-----------------------------------------
+  switch as root user first
+
+  syntax: useradd <username>
+  eg:
+  [root@ip-172-31-93-35 ~]# useradd viratkohli
+  
+How to verify new user created / not ?
+----------------------------------------
+- Go to /home directory & verify directory is created in newly created users name
+                           (or) 
+  check for entry in file --> cat /etc/passwd | tail -1
+  
+  
+    [ec2-user@ip-172-31-93-35 ~]$ cd /home
+    [ec2-user@ip-172-31-93-35 home]$ ls -lrt
+    total 0
+    drwx------ 4 ec2-user   ec2-user   142 Jul  6 03:23 ec2-user
+    drwx------ 2 viratkohli viratkohli  83 Jul  6 05:53 viratkohli
+    [ec2-user@ip-172-31-93-35 home]$
+
+
+Note:
+----
+- whenever we create user, a new group will also gets created automatically with the created users name .
+- whenever we create user, Inside /home automatically new folder will gets created with the created users name
+
+
+command to switch from one user to another user?
+-----------------------------------------------
+su - <username>
+
+_________________________________________________________________________________
+ 
+How to set password for newly created user?
+  syntax: passwd <username_created>
+  
+  Note: password you are typing will not be visible in your screen
+  
+  eg:
+  
+  [root@ip-172-31-93-35 ~]# passwd viratkohli
+  Changing password for user viratkohli.
+  New password:
+  Retype new password:
+  passwd: all authentication tokens updated successfully.
+  [root@ip-172-31-93-35 ~]#
+
+
+
+
+
+SUDO users:
+-----------
+
+we should not permitt all users to access ROOT user due to security purpose.
+
+Sudo stands for “super user do” 
+
+if a user has sudo permissions, then he can run commands like root user ,
+if we add any user to SUDOERS list, we can  run commands like root user, without logging as root user.
+
+
+
+
+How to add user to sudo group?
+-------------------------------
+   Step1: login as root user (because only root user can give sudo permissions to any user)
+          sudo su - 
+   Step2: edit vi /etc/sudoers file will gets opened now go to last line of file add block
+               <Your_userName> ALL=(ALL)       NOPASSWD: ALL
+          example: devops_user ALL=(ALL)       NOPASSWD: ALL
+                 save & quit the file ( :wq! )
+                 after saving the file run below command
+   
+   step3: Run below command to apply changes done in previous steps
+          service sshd restart
+   
+   now user got added to sudoers list, switch to created user using su - <user_name>, check by running commands with sudo prefix.
+
+
+
+
+
+Note:
+-----
+- to delete user command   ==> $userdel <user-name>
+- to create group manually ==> $groupadd <group-name>
+
+
+
+
+Assignment: 
+-----------
+
+- command to check size of afile
+
+- create multiple user in your names, add the created user to sudo group & verify sudo priviliges.
+
+

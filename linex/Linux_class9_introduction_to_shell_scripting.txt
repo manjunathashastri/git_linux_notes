@@ -1,0 +1,245 @@
+startup file ( .bashrc ):
+-------------------------
+startup file will get executed automatically, eachtime you login to your server.
+
+.bashrc file location ==> every user's home directory ==> /home/<user>
+
+each user will have his own .bashrc / startup file
+
+Observation on startup file:
+vi .bashrc ===> go to last line & add some echo statements & save comeout
+
+close your session (ctrl+D) & login again , you will see the message putup in .bashrc file printed as soon as you logsin.
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+telnet :
+--------
+Telnet is used to connect to remote systems. 
+it is oldest network protocol.
+it is not secure.
+It connects to servers and network equipment over port 23.
+
+syntax:
+telnet <ip_of_remote_server> <port_number_tobe_checked>
+
+note:
+yum install telnet -y
+
+
+
+how do you check a port number in another server is listening or not, from your server?
+----------------------------------------------------------------------------------------
+telnet <ip_address_remote_server> <port_number_tobe_checked>
+
+if the port in remote server is opened(listening) ==> we get connected to that server
+if the port in remote server is not opend(non listening) ==> we get connection failed error
+
+
+
+
+ssh-keys:
+---------
+ssh keys help secure your communication with other servers.
+ssh-keygen creates keypair(two files). 
+   1. public key (like a lock) ==> can be share with any servers / anyone
+   2. private key (like a key) ==> keep it secret (dont share with anyone).
+
+syntax: ssh-keygen 
+observation: 
+ - after running above command, use enter (keyboard) 3 times
+ - all ssh files get stored in the user's home directory ==> /home/<users_name>/.ssh
+ - in .ssh directory
+    ~/.ssh/id_rsa.pub ==> publickey
+    ~/.ssh/id_rsa     ==> private key 
+
+Note:
+-----
+in linux home directory is also called as ~
+
+Assignment:
+-----------
+Establish passwordless connection between servers.
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+variables:
+----------
+Variables are memory location which can store some values.
+
+syntax: <variable_name>=<variable_value>
+        eg: MYNAME=devops_user
+  
+
+
+How to print / check / substitute / call values of a variable?
+--------------------------------------------------------------
+
+$ (dollar) is mandatory while substituting varaible ==> $<variable_name>
+
+echo $<variable_name>
+
+
+ex: PLAYER=viratKohli
+    echo " my favorite sportsmen is $PLAYER "
+
+
+Variable types:
+---------------
+1. Local variables / user defined variables.
+   variables created by user
+
+
+2. system / predefined variables.
+   variables created by system
+   env ==> command to check system defined variables
+
+
+
+user defined variables are only valid till your terminal(session) exists or your servers running.
+
+
+to store variables irrespective of terminal running or restarts
+
+How to set variable permanately in all shell sessions & also server restarts ?
+------------------------------------------------------------------------------
+Answer: By adding the variable inside startup script ( ~/.bashrc ).
+        
+
+
+**********IMPORTANT***********************
+
+EXIT CODE 
+-------------
+every command /script generates an auomatic code which signifies, previous command execution is succesfull or not
+syntax: echo $?
+
+if output is 0 zero ==> command executed succesfully
+if output is  non-zero ==> Command not executed succesfully  
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   
+
+SHELL:
+------
+1  Shell is responsible to read command provided by user.
+2. Shell will check whether the command is valid or not.
+3. Shell interpretes (converts) that command into kernel understandable form & Kernel execute that command with the help of hardware. 
+   
+Shell + kernel = Linux OS.
+
+Types of shell:
+---------------
+1. sh    ==> basic shell, earlier / olden days is used in unix   ==> /bin/sh
+2. bash  ==> adavnced shell, which is used in linux    ==> /bin/bash 
+others: c-shell, k-shell etc
+
+Note: echo $SHELL ==> Command to check which shell we are using
+
+Steps to create & execute shell script:
+----------------------------------------
+step1. shell script will have extension called <script-name>.sh
+        vi <script-name>.sh
+step2. in the script first line we are going to write is called as shebang  #!/bin/bash
+         
+step3. you add your commands (save the script file)
+
+step4.  execute the script 
+       sh <script-name>.sh  (or) bash <script-name>.sh (or) ./<script-name>.sh
+
+
+
+what is shebang line, why its sused?
+------------------------------------
+shebang line is used to specify interpreter (or) shell to be used for execution of script
+
+
+can we run script without shebang line?
+------------------------------------------
+yes, in that case whatever default shell is there, that will get used.
+
+
+
+
+script1. write a shell script to print date & time.
+---------------------------------------------------
+vi date-script.sh
+
+#!/bin/bash
+echo "Current date and time...."
+date
+
+save & quit 
+
+execute script
+sh date-script.sh
+
+
+
+script2. write a shell script to CHECK Storage(HDD) of server.
+--------------------------------------------------------------
+
+vi STORAGE-script.sh
+
+#!/bin/bash
+echo "Current storage used is ...."
+df -kh | head -5 | tail -1 | awk -F " " '{print$5}'
+
+save & quit 
+
+execute script
+sh STORAGE-script.sh
+
+
+
+script3: write a script to create a variable (sportsman=viratkohli) & verify the variable creation using echo command:
+---------------------------------------------------------------------------------------------------------------------- 
+[ec2-user@ip-172-31-6-171 ~]$ cat vars_check.sh
+#!/bin/bash
+sportsman=viratkohli
+echo "my fav sportsamen is $sportsman"
+
+
+
+
+
+script4: write a script to have employee data coming as variables & verify the variable creation using echo command:
+----------------------------------------------------------------------------------------------------------------------
+[ec2-user@ip-172-31-93-35 ~]$ cat employee_data.sh
+
+#!/bin/bash
+EMP_NAME=alice
+EMP_ID=54234
+EMP_LOC=bangalore
+EMP_STATE=karnataka
+echo "Display employee name $EMP_NAME "
+echo "Display emloyee id $EMP_ID "
+echo "Display employee location $EMP_LOC "
+echo "Display employee state $EMP_STATE "
+
+
+
+script5: script to check harware resources:
+-------------------------------------------
+[ec2-user@ip-172-31-6-171 ~]$ cat ram_usage_check.sh
+
+#!/bin/bash
+echo "Current free ram available is..."
+
+free -m | grep Mem | awk -F " " '{print $4}'
+#free -m
+
+echo "current disk usage is..."
+df -kh .
+
+echo "number of cpu...."
+nproc

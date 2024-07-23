@@ -1,0 +1,158 @@
+Sleep command:
+--------------
+it will pause your terminal/shell for certain time
+
+syntax: sleep <time_in_seconds>
+        sleep 30
+
+
+ps
+--------
+It is used to display information about running processes.
+which stands for "process status."
+
+ps -aux:
+-------
+is used to list all process running in linux.
+ps -ux  ==> displays only processes started by current user
+ps -aux ==> displays all processes started by all user
+
+When you run `ps aux`, the command will display a list of processes in a tabular format. Here's a breakdown of the columns you might see:
+
+- USER: The username of the owner of the process.
+- PID: The unique Process ID that identifies each running process.
+- %CPU: The percentage of CPU (processor) usage by the process.
+- %MEM: The percentage of RAM (memory) usage by the process.
+- START: The start time of the process.
+- TIME: The total accumulated CPU time used by the process.
+- COMMAND: which commans created the process.
+
+Here's an example output of `ps aux`:
+
+```
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+john     12345  5.0  2.0 200000 100000 ?       R    Sep10  10:30 /usr/bin/example
+mary     23456  0.0  0.5  50000  25000 pts/1   S    Sep11   0:45 /usr/bin/another
+root     34567  1.0  1.5 150000  75000 tty1     Ss   Sep09   2:00 /sbin/init
+
+
+kill
+--------
+kill command is used to stop/ terminate the running process (ps -ef)
+syntax: kill -9 <ProcessID>
+        9==> signal
+		
+		
+SED:
+----
+ sed command is used to replace a string/pattern without opening file.
+ 
+ syntax: 
+ 
+ sed -i 's/<old_name>/<new_name>/g' filename
+ 
+ 
+   [ec2-user@ip-172-31-16-223 ~]$ cat samplefile2
+   Hello all,
+   we are learning unix
+   [ec2-user@ip-172-31-16-223 ~]$
+
+   to replace name unix with Linux in above example ==> sed -i 's/unix/Linux/g' samplefile2
+   
+   
+   
+--------------------------------------
+
+
+Find:
+-----
+
+find command is used to search for a file/folder.
+
+Find provides multiple options for searching a file eg: name, size, group, user, date, permissions, etc..,
+Note:- Some times you are trying to find some files you got permission denied errors, On that case use sudo before the
+command
+
+syntax: find <path> -name <filename_tobe_searched>
+
+find /home/ec2-user -iname  <filename_tobe_searched>
+
+i ==> ignore case-insensitive
+
+
+To search only a directory 
+find <path> -type d  -name <directoryname_tobe_searched>
+
+To search only a file
+find <path> -type f  -name <filename_tobe_searched>
+
+Assignment:
+-----------
+find command to list files size more than 1GB 
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+SSH (Secure Shell):
+-------------------
+using ssh we can login to linux server 
+SSH is the most commonly used way to login secuerly to any linux servers
+
+In SSH we have two type of logging in:
+---------------------------------------
+    1. using private key file (.pem file ) ( more secure)
+	   
+	   so far we have logged in to ec2 by this type (using .pem file or private key file)
+	    
+		syntax: to login using pem file
+		ssh -i <path_to_private_key_file>  <username>@<ipaddress>
+		ssh -i "Sept_Key_pair.pem" ec2-user@ec2-54-224-83-60.compute-1.amazonaws.com
+		
+		Note: .pem file is called as private key file....
+	   
+    2. using password  ( less secure)
+	    
+		syntax: to login using password
+		ssh <username>@<ipaddress>
+        
+		ssh yash@54.224.83.60
+
+
+Note: by default aws / linux blocks password based authentication, so to change that
+
+How to login server from users which we have created using passwords?
+--------------------------------------------------------------------
+1. In linux servers by default, password authentication is set no(disabled), 
+(login as root) enable in the /etc/ssh/sshd_config  file and restart sshd service
+     (PasswordAuthentication no ) change to (PasswordAuthentication yes)
+
+     service sshd restart
+
+2.In password based authentication you need to provide password mandatorily while logging in
+
+Note:
+syntax to set password for user 
+passwd <usersName>
+
+
+
+uptime
+-------
+is used to check from how long the system is up & running
+  (or) 
+how long since server is started
+
+
+who
+----
+command is used to check how many user logged in to system
+
+
+Hostname
+--------
+command is used to print your server name
+
+
+

@@ -1,0 +1,77 @@
+What is a server?
+high configuration computer
+
+Mobile: RAM   Storage(HDD)    Processor(CPU)  + android OS 
+Laptop: RAM   Storage(HDD)    Processor(CPU)  + windows OS
+Servers: RAM   Storage(HDD)    Processor(CPU)  + Linux OS ==> linux server
+
+Hardware components?
+--------------------
+1.RAM   2.Storage(HDD)  3.Processor(CPU) 
+
+
+if we can connect these H/W parts, Operating system(OS)
+
+What is OS?
+-----------
+it takes input from user, it will connect to H/W compoents & completes you are requests
+
+
+windows servers ?   7-10% 
+Linux  ? 90%
+
+
+Linux:
+------
+was found in 1970's ==> unix
+
+What is Opensource?
+-------------------
+secret  ==> Compositions & how do they make
+windows ==> to develop windows OS there are lot of programms/code will be written, which will be kept secretly
+unix   ==> to develop linux OS there are lot of programms/code will be written, which is avaialble in internet for free 
+linus tolwards ==> he took unix source code, developed his own version ==> linux
+
+
+Windows:                        Linux:
+--------                        ------
+Paid OS                         Free OS
+is not opensource               its opensource
+Single user based OS            multi user based OS 
+Less secure                     More secure
+recommended for personal usage  buisness level usage , app hosting 
+GUI                             CLI 
+
+
+
+Android is linux based OS 
+ios is linux based OS
+
+
+To start with Linux?
+--------------------
+1. Format my PC . install LINUX os
+2. using extra softwares install LInux
+3. We can get linux servers for free directly from Cloud service providers ( AWS ) 
+   Virtual servers ==>  we can rent for free from AWS
+   RAM:1GB HDD:8GB CPU: 1core 
+  
+Create an acoount in AWS ?
+--------------------------
+signup https://aws.amazon.com/
+email id , phone number , Debit card / credit card ( dont use rupay cards), card is enabled international transactions 
+
+
+we will launch an server in AWS & we will connect to that?
+----------------------------------------------------------
+Servers will be available in aws by name ec2 
+
+in order to acccess servers we have use an s/w ==> gitbash ( https://git-scm.com/download/win )
+   
+   
+
+
+
+
+
+

@@ -1,0 +1,125 @@
+vi (vi editor is used to edit the file)
+----------------------------------------
+
+syntax: vi <your_file_name>
+
+note:  make sure you can see insert option( using i button (keyboard) while adding content
+       Esc(keyboard) is used to come out of insert mode
+
+  comeout of file with saving    ==> Esc(keyboard) :wq! ==> save(w)  quit(q) ! forcefully
+  comeout of file without saving ==> Esc(keyboard) :q!
+
+
+   
+cat (concatanate)
+--------------
+cat command is used to display the content of a file
+
+syntax: cat <file_name>
+
+cat -n <file_name> ==> disaplays the content of file along with line numbers 
+
+
+cp (copy)
+----------------
+used to copy content of a file to another file
+syntax: cp <file_to_be_copied> <destinationFilename>
+
+if <destinationFilename> dosent exist , copy will creates that file & copies content
+
+mv (rename)
+----------------
+used to rename file
+syntax: mv <your_current_fileName> <newDesired_FileName>
+
+
+
+create multiple blank(empty) files:
+-----------------------------------
+touch file1 file2 file3
+
+create multiple directories:
+----------------------------
+mkdir dir1 dir2 dir3 
+
+
+
+
+ls -lrt
+--------
+list the files & also list recently created or recently modified file will be dispalyed in bottom of terminal (or screen or shell)
+
+
+date:
+-----
+date command is used to display current time
+
+
+
+How to craete a directory inside another directory (nested directory)
+--------------------------------------------------------------------
+mkdir -p dir1/dir_tobe_created
+  p: path
+
+
+mkdir -p dir1/dir2/dir3
+  -p means path of directories. 
+   All directories in the specified path will be created. 
+   First dir1 will be created and in that dir2 will be created and within dir2 directory dir3 will gets created.
+
+
+to delete multiple files:
+------------------------
+files ==> rm -f <filename1> <filename2>
+directories/folders  ==> rm -rf <directoryname1> <directoryname2>
+
+
+
+Create hidden files
+-------------------
+to create hidden file / directory we need to use .(dot) at the front of your file / directory name
+
+
+
+ls -a (or) ls -lrta
+-------------------
+to list hidden files
+
+
+
+
+more:
+------ 
+more is used to display content of a file pagewise
+  
+syntax: more <fileName>
+
+  in more we can only scroll down & we cant scroll up
+  use spaceBar button to move down
+  press q to come out of the mode
+  
+  
+less:
+----- 
+used to display content of a file pagewise 
+  
+  syntax: less <fileName>
+  
+  using less we can scroll up & scroll down.
+  use arrow key buttons to move up & down
+  press q to come out of the mode
+
+
+
+
+
+++++++++++++++++++++++++++++++++++
+
+
+Next set of commands:
+---------------------
+head
+tail
+redirect ( > )
+append   ( >> )
+Pipe  ( | )

@@ -1,0 +1,192 @@
+Agenda:
+=======
+- word count (wc) 
+- egrep , rgrep
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Note:
+-----
+Directories
+1. to copy 1 directory to another directory
+   syntax: cp -r <source_directory> <target_directory>
+
+   Here: -r ==> recursiveness (consider all files,subdirectories inside that dierctory)
+
+2. MV (move) command can be used in two ways
+   - for Files ==> we can use to rename a file
+   - for Directories ==> apart from renaming, mv(move) is also used to move a directory to another directory (i.e cut & paste directories)
+
+3. in linux * this indicates all 
+
+
+
+
+word count:
+-----------
+word count is used to count number of lines, number of words & number of charecters in a file
+  syntax: wc <fileName>
+
+other options with word counts
+   i.  to count only number of lines 
+       syntax: wc -l <fileName>
+       
+   ii. to count only number of words
+       syntax: wc -w <fileName>
+       
+   iii. to count only number of charecters
+        syntax: wc -c <fileName>
+
+
+Grep command:
+-------------
+to search a pattern (keyword) in a file
+if a pattern(keyword) is found it will print all the matched line
+
+syntax: grep <pattern_tobe_searched> <filename>
+
+        grep hyderbad census_data 
+
+        to search for a pattren without case sensisnsivity
+       
+
+Other use cases of grep command: 
+--------------------------------
+
+- To search ignoring case sensitivities:
+  grep -i <pattern_to_search> fileName
+  i ==> search by ignoring case sensitivity 
+  
+- egrep:
+  -----
+  its used to search multiple patterns in same file
+  
+  grep -e "<pattern_1>" -e "<pattern_2>" fileName
+
+- rgrep (RECURSIVE grep):
+  -----------------------
+  Search pattern in present working directory & also in all sub-directories.
+  
+  grep -r <pattern_to_search> <directory_name>
+  
+   - rgrep will list filename containing pattern & also prints the entire line which contains charecter.
+   - To search patterns in all files of present working directory:
+      syntax: grep -r <pattern_to_search> *
+
+ 
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+*******IMPORTANT***********
+
+What is a link file and how many types?
+---------------------------------------
+Link file is a short cut file to the original file.
+ 
+There are two types of links files available in Linux.
+(i) Soft link
+(ii) Hard link
+
+What is soft link and how to create it?
+---------------------------------------
+- Soft link is nothing but a short cut file. 
+
+Syntax: ln -s <original_file_or_directoryname> <linkfilename_or_directorywithpath> 
+
+- If original file is deleted, no use of softlink  (ie., we cannot access the original data by selecting the link file)
+- Soft link can be applied on both directories and files.
+- inode number of original and soft link files are different.
+- If we edit original file, the softlink are also updated automatically.
+
+
+What is hard link and how to create it?
+--------------------------------------
+- Hard link in nothing but a backup of a file. 
+
+Syntax: ln <original_file_name> <linkfilename> 
+
+- If the original file is deleted, there is no effect on hard link file. (i.e., we can access the original file data even though the link file is deleted.)
+- Hard links can only be applied on files only not on directories. 
+- inode number of original and hard link files are same.
+
+Note on hardlinks:
+- If the original is edited, the updations are applied on both original and hard link files.
+- The size of the hard link file is same as the size of the original file.
+
+
+Note:
+----
+  what is inode number?
+  Linux creates a unique number for all files & directories that gets created, 
+  to check i node number, ls -li <file/directory name>, first column shows inode number  
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+File system in linux:
+-------------------------------
+
+
+In Windows: all OS files will be stored in C drive
+
+In Linux: all OS files will be stored in /  
+
+[ / is called as ROOT directory ]
+
+/ ==> ROOT directory , is like c drive in windows & it will contain all linux os related files & folders.
+
+
+to go to ROOT directory ==> cd /
+
+
+
+Folders in root directory:
+
+[ec2-user@ip-172-31-16-223 ~]$ pwd
+/home/ec2-user
+[ec2-user@ip-172-31-16-223 ~]$ cd /
+[ec2-user@ip-172-31-16-223 /]$ pwd
+/
+[ec2-user@ip-172-31-16-223 /]$ ls
+bin   dev  home  lib64  media  opt   root  sbin  sys  usr
+boot  etc  lib   local  mnt    proc  run   srv   tmp  var
+[ec2-user@ip-172-31-16-223 /]$
+
+
+Important Folders in root directory:
+
+1) bin: 
+   ---
+    It contains the commands and binary files. 
+       User can access the commands. 
+       Ex:  mkdir, ls, cd, ps….
+
+2) etc: 
+   ---
+    It contains the configuration files.
+    
+3) home: 
+   ----
+   It contains home directories for all users to store their personal files.
+   Ex: /home/ec2-user or /home/bharath
+
+4) var:
+   ----
+    It contains variable files. 
+    This includes system log files(/var/log), emails (/var/mail)
+    
+5) tmp : 
+   -----
+    It contains the temporary files.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Next Topics:
+------------
+- user adminstartion in linux
+- Hardware commands check 
+- sudo user
